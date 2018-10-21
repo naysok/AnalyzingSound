@@ -3,6 +3,8 @@ import numpy as np
 import wave
 
 
+
+
 def plot_wave(file_name):
 
     # opnen wav file
@@ -18,9 +20,13 @@ def plot_wave(file_name):
 
     amp = (2**8)**wf.getsampwidth()/2
 
-    data = wf.readframes(chunk_size)
-    data = np.frombuffer(data, "int16")
-    data = data/amp
+    data_read = wf.readframes(chunk_size)
+    data_src = np.frombuffer(data_read, "int16")
+    data = data_src/amp
+
+    data_amp = data_src*0.01
+
+    # print(data_src)
 
 
     # time axis
@@ -30,6 +36,8 @@ def plot_wave(file_name):
     # multi channels
     for i in range(channels):
         plt.plot(x, data[i::channels])
+        # plt.plot(x, data_amp[i::channels])
+
 
     title = "Plot Wave - " + '"' + FILE + '"'
 
@@ -38,10 +46,11 @@ def plot_wave(file_name):
     plt.ylabel("standardizes amplitude")
 
     plt.ylim([-2, 2])
+    # plt.ylim([-500, 500])
 
     plt.show()
 
-FILE = "Everything_affair.wav"
+FILE = "drum_machine_30.wav"
 # FILE = "nene_2.wav"
 in_path = "data/" + FILE
 
