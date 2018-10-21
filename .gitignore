@@ -2,3 +2,6 @@
 
 /data/
 /Graph/
+
+*.mp4
+*/*.mp4
