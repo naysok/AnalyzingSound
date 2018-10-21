@@ -76,7 +76,7 @@ print_info.py で出力される結果例
 
 plot_wave.py で、何か波形が出せた。  
 正規化しているので、-1 から 1の範囲になってる  
-![photo](ex/plot_wave_ex.png)  
+![photo](ex/plot_wave.png)  
 
 
 ---  
@@ -88,7 +88,7 @@ spectrum.py とりあえず写経
 0フレから1024フレまでの、周波数解析の結果を表示  
 
 （ +matplotlib で、Graph の png 出力できた）
-![photo](ex/Graph_ex.png)  
+![photo](ex/Graph.png)  
 
 
 上を拡張して spectrum_30_FPS.py  
@@ -98,6 +98,22 @@ ffmpeg -i file で出てくる値に近い
 
 
 ----  
+
+
+### 解析にかける音域  
+
+いまのところ、matplot でプロットしている横軸、0~2756 にしているが（拾ったコードがこうだったので）、あとで情報として使える音域を調べてみる。
+
+Wikipedia の 聴覚 によると
+
+>可聴域  
+ヒトでは通常、下は20Hz程度から、上は（個人差があるが）15,000Hzから20,000Hz程度までの鼓膜振動を音として感じることができ、この周波数帯域を可聴域という。可聴域を超えた周波数の音は超音波という。  
+
+![photo](ex/Hearing-Wiki.png)  
+
+[https://ja.wikipedia.org/wiki/聴覚](https://ja.wikipedia.org/wiki/%E8%81%B4%E8%A6%9A)
+
+---  
 
 ---  
 
