@@ -94,7 +94,15 @@ spectrum.py とりあえず写経
 上を拡張して spectrum_30_FPS.py  
 これを、30FPS ごとに解析するように、書き換えたもの  
 
-ffmpeg -i file で出てくる値に近い
+これで、1フレーム内で正規化？されていて、前後のフレームで比べるみたいなことができない  
+```python
+data_max = data_fft/max(abs(data_fft)) # 正規化？
+```
+
+正規化しないでも良い  
+
+
+長さを計算してみると、ffmpeg -i file で出てくる値に近い
 
 
 ----  

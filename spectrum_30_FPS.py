@@ -32,13 +32,14 @@ def load_fft(FILE ,size):
     d = 1.0 / fr
     freqList = np.fft.fftfreq(size, d)
 
+    print("freqList :", freqList)
 
     FILE_r = "data/" + FILE + ".wav"
 
 
     wave = load_wave(FILE_r)
 
-    for i in range(9176832):
+    for i in range(1323000):
     # for i in range(10000): # debug
 
 
@@ -51,11 +52,22 @@ def load_fft(FILE ,size):
             FILE_out = "Graph/" + FILE + "-" + num + ".png"
 
             windowedData = hammingWindow * wave[i:i+size]
-            data = np.fft.fft(windowedData)
-            data = data/max(abs(data))
-            plt.plot(freqList, abs(data))
 
-            plt.axis([0, fr/16, 0, 2])
+            data_fft = np.fft.fft(windowedData)
+            data_src = abs(data_fft*10)
+            print(data_src)
+
+            data_max = data_fft/max(abs(data_fft)) # 正規化？
+
+            # plt.plot(freqList, abs(data_max))
+            plt.plot(freqList, abs(data_src))
+            # plt.bar(freqList, abs(data_src))
+
+
+            # plt.axis([0, fr/16, 0, 2])
+            # plt.axis([0, 4096, 0, 2])
+            plt.axis([0, 4096, 0, 1000])
+
             plt.title(FILE_t)
             plt.xlabel("Frequency [Hz]"), plt.ylabel("Amblitude Spectrum")
             plt.show()
@@ -64,10 +76,10 @@ def load_fft(FILE ,size):
 
             print(str(i))
 
-    return data
+    # return data
 
 
-load_fft("Everything_affair", 1024)
+load_fft("Cluster_A_30", 1024)
 
 
 print("Finish!!")

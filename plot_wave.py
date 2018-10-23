@@ -33,10 +33,42 @@ def plot_wave(file_name):
     size = float(chunk_size)
     x = np.arange(0, size/fr, 1/fr)
 
+    # print("channel Count :", channels)
+    ### out, 2
+    ### Stereo
+
+
+    """
     # multi channels
     for i in range(channels):
         plt.plot(x, data[i::channels])
         # plt.plot(x, data_amp[i::channels])
+
+        print("i :", i)
+
+        data_len = len(x)
+        print("length :", data_len)
+        ### out, 1323000
+        ### 1323000 = 30 * 44100
+
+        print("data", data)
+        print("- - -")
+    """
+
+
+    # Single
+    plt.plot(x, data[0::channels])
+
+    data_len = len(x)
+    print("length :", data_len)
+    ### out, 1323000
+    ### 1323000 = 30 * 44100
+
+    print("data :", data)
+    print("- - -")
+
+
+
 
 
     title = "Plot Wave - " + '"' + FILE + '"'
@@ -51,6 +83,7 @@ def plot_wave(file_name):
     plt.show()
 
 FILE = "drum_machine_30.wav"
+FILE = "Cluster_A_30.wav"
 # FILE = "nene_2.wav"
 in_path = "data/" + FILE
 
