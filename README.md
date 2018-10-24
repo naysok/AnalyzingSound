@@ -121,6 +121,91 @@ Wikipedia の 聴覚 によると
 
 [https://ja.wikipedia.org/wiki/聴覚](https://ja.wikipedia.org/wiki/%E8%81%B4%E8%A6%9A)
 
+
+---  
+
+
+### 音の強さを CSV に書き出す  
+
+plot_wave_csv.py で、解析によって出てきた値を csv に入れた。  
+
+```python
+CSV_data = []
+
+temp = str(j) + "," + str(count) + "," + str(data_zero[j]) + ",\n"
+# print(temp)
+
+CSV_data.append(temp)
+
+with open(path_csv, mode='w') as f:
+    f.writelines(CSV_data)
+```
+
+csv  
+
+|**j** |**count** |**amp** |
+|--:|--:|--:|
+|0|0|0.0|
+|1470|1|0.0|
+|2940|2|0.0|
+|4410|3|0.0|
+|5880|4|0.0|
+|7350|5|-0.06158447265625|
+|8820|6|-0.114013671875|
+|10290|7|-0.035675048828125|
+|11760|8|0.0908203125|
+|13230|9|-0.080963134765625|
+|14700|10|-0.02813720703125|
+|16170|11|0.137420654296875|
+|17640|12|-0.08941650390625|
+|19110|13|-0.010498046875|
+|20580|14|0.12298583984375|
+|...|...|...|  
+
+
+---  
+
+
+### CSV を読み込む  
+
+Blender でも、使えるように、Pandas ではなくて、標準の csv モジュールでやる  
+
+Amp_csv_reading_test.py 、読み込みのテストコード  
+
+```python
+for i, row in enumerate(reader):
+    print(i, row[0], row[1], row[2])
+```
+
+
+---  
+
+
+### CSV の値を使って、Blender に、キーフレームを打つ  
+
+最低限の雛形として、Amp_csv_Blender.py を書いた  
+csv モジュールで、csv が問題なく読めた  
+
+カメラの位置角度等、マテリアルの色とかにアクセスできるようにしたら普通に便利  
+
+データパスをコピーとかでちゃんと調べる  
+ex)  
+デーフューズ BSDF のノードの色のパス  
+nodes["Diffuse BSDF"].inputs[0].default_value  
+
+```python
+# 値を持ってくる
+size = abs(float(row[2]))*1.25 + 0.1
+
+# 値をパラメータに設定
+cube.scale.x = size
+
+# キーフレームを打ち込む
+cube.keyframe_insert(data_path = "scale", index=0, frame=i)
+
+```
+
+
 ---  
 
 ---  
