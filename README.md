@@ -194,6 +194,8 @@ ex)
 デーフューズ BSDF のノードの色のパス  
 nodes["Diffuse BSDF"].inputs[0].default_value  
 
+bpy  
+
 ```python
 # 値を持ってくる
 size = abs(float(row[2]))*1.25 + 0.1
@@ -205,6 +207,10 @@ cube.scale.x = size
 cube.keyframe_insert(data_path = "scale", index=0, frame=i)
 
 ```
+
+amp だけでは、アニメーションにした結果は、思ってたほど可愛くないので、結構微妙だった。  
+
+ちゃんと音の高さで必要なものだけ、低音のリズムを使うとか工夫が必要っぽい...  
 
 
 ---  
