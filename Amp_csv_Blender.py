@@ -1,7 +1,9 @@
 import bpy
 import csv
 
-filePath = '/Users/yoshionao_mbp/Documents/AnalyzingSound/data/Cluster_A_30.csv'
+# filePath = '/Users/yoshionao_mbp/Documents/AnalyzingSound/data/Cluster_A_30.csv'
+filePath = '/Users/yoshionao_mbp/Documents/AnalyzingSound/ex/Cluster_A_30.csv'
+
 
 f = open(filePath, "r")
 reader = csv.reader(f)
@@ -16,9 +18,10 @@ cube = bpy.data.objects[bpy.context.object.name]
 for i, row in enumerate(reader):
     # print(row)
     if (i > 0):
-
+        ### manege parameter
         size = abs(float(row[2]))*1.25 + 0.1
         rot = float(row[2])*0.5
+        ### operate Blender
         cube.scale.x = size
         cube.scale.y = size
         cube.scale.z = size

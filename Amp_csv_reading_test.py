@@ -1,6 +1,8 @@
 import csv
 
-filePath = '/Users/yoshionao_mbp/Documents/AnalyzingSound/data/Cluster_A_30.csv'
+# filePath = '/Users/yoshionao_mbp/Documents/AnalyzingSound/data/Cluster_A_30.csv'
+filePath = '/Users/yoshionao_mbp/Documents/AnalyzingSound/ex/Cluster_A_30.csv'
+
 
 f = open(filePath, "r")
 reader = csv.reader(f)
