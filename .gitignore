@@ -2,6 +2,7 @@
 
 /data/
 /Graph/
+/Result/
 
 *.mp4
 */*.mp4
