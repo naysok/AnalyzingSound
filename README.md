@@ -215,6 +215,63 @@ amp だけでは、アニメーションにした結果は、思ってたほど�
 
 ---  
 
+
+### 純粋な音の素材を用意して、解析してみる  
+
+音を作るのは、Sonic Pi  
+
+これを使う理由は、無料 + 名前演奏と違ってコードで書くので再現性の高さ有り、明示的  
+
+- case_1  
+
+  60.wav  
+  ドー・ドー・ドー  
+  ※ ドは、262Hz  
+  ```rb
+  live_loop :flibble do
+    play 60
+    sleep 1
+    play 60
+    sleep 1
+    play 60
+    sleep 1
+    play 60
+    sleep 1
+  end
+  ```
+
+
+
+  plot_wave.py で音の強さをみる  
+  かなり綺麗な波形が出た  
+
+  ![photo](ex/60-amp-01.png)  
+  ![photo](ex/60-amp-02.png)  
+
+  spectrum_30_FPS.py で、各フレームごとのに、周波数解析  
+  あるフレームの解析結果  
+  ![photo](ex/60-Spectrum.png)  
+
+
+- case_2  
+
+  60_62_64.wav  
+  ドー・レー・ミー・ドー・レー・ミー  
+  ```rb
+  live_loop :flibble do
+    play 60
+    sleep 1
+    play 62
+    sleep 1
+    play 64
+  end
+  ```
+
+
+
+
+---  
+
 ---  
 
 
