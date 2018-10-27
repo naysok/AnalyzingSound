@@ -152,9 +152,9 @@ def plot_wave(file_name_in):
 
 
 
-# FILE = "drum_machine_30.wav"
-FILE = "Cluster_A_30"
-# FILE = "nene_2.wav"
+# FILE = "drum_machine_30"
+FILE = "60_62_64"
+# FILE = "nene_2"
 in_path = "data/" + FILE
 
 
