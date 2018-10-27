@@ -216,56 +216,78 @@ amp だけでは、アニメーションにした結果は、思ってたほど�
 ---  
 
 
-### 純粋な音の素材を用意して、解析してみる  
+### ちょっとうまく行ってなそうな気配があるので、純粋な音の素材を用意して解析  
 
-音を作るのは、Sonic Pi  
+一個上の、Blender にキーフレーム打ちした結果があまりにも微妙なので、中身をコントロールして（ある程度理解して使えるような）、ピュアな音の素材で試す。  
+
+音を作るのに使うのは、Sonic Pi  
 
 これを使う理由は、無料 + 生演奏と違ってコードで書くので再現性の高さが有る、明示的  
 
-- case_1  
+##### case_1 : 60.wav  
 
-  60.wav  
-  ドー・ドー・ドー  
-  ※ ドは、262Hz  
-  ```rb
-  live_loop :flibble do
-    play 60
-    sleep 1
-    play 60
-    sleep 1
-    play 60
-    sleep 1
-    play 60
-    sleep 1
-  end
-  ```
+ドー・ドー・ドー    
+※ ドは、262Hz  
+```rb
+live_loop :flibble do
+  play 60
+  sleep 1
+  play 60
+  sleep 1
+  play 60
+  sleep 1
+  play 60
+  sleep 1
+end
+```
 
+plot_wave.py で音の強さをみる  
+かなり綺麗な波形が出た  
 
+![photo](ex/60-amp-01.png)  
+![photo](ex/60-amp-02.png)  
 
-  plot_wave.py で音の強さをみる  
-  かなり綺麗な波形が出た  
-
-  ![photo](ex/60-amp-01.png)  
-  ![photo](ex/60-amp-02.png)  
-
-  spectrum_30_FPS.py で、各フレームごとのに、周波数解析  
-  あるフレームの解析結果  
-  ![photo](ex/60-Spectrum.png)  
+spectrum_30_FPS.py で、各フレームごとのに、周波数解析  
+あるフレームの解析結果  
+ドの 262 Hz がちゃんと出てる  
+![photo](ex/60-Spectrum.png)  
 
 
-- case_2  
+##### case_2 : 60_62_64.wav  
 
-  60_62_64.wav  
-  ドー・レー・ミー・ドー・レー・ミー  
-  ```rb
-  live_loop :flibble do
-    play 60
-    sleep 1
-    play 62
-    sleep 1
-    play 64
-  end
-  ```
+ドー・レー・ミー・ドー・レー・ミー  
+ド 262Hz  
+レ 294Hz  
+ミ 330Hz  
+```rb
+live_loop :flibble do
+  play 60
+  sleep 1
+  play 62
+  sleep 1
+  play 64
+end
+```
+
+同様に、plot_wave.py 、spectrum_30_FPS.py で綺麗に出る  
+
+plot_wave_csv.py で、30FPS のフレームごとに値を取り出し、CSV に。  
+
+この、CSV の値を使って、スペクトラムの動画に、スケールが変わる画像を貼り重ねる。  
+CSV の値の取り出しで、Pandas を使ってみた。簡単。  
+```python
+scale_src = float(data[2][i+1])*1.1
+scale = abs(scale_src) + 0.15
+```
+→ 失敗、良くない  
+スケールが変わる画像の、スケールが振動する  
+
+44100フレ/秒から、ある1フレームだけ取り出すと、振動しているので値が綺麗にとれない、多分  
+切り出したいある瞬間から、幾らかのフレームをまとめてサンプリングして、値を算出すると良さそう。  
+
+plot_wave_csv.py を修正するか、spectrum_30_FPS.py から、max() でアンプを取り出すのが必要  
+
+
 
 
 
