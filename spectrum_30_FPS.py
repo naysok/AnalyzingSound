@@ -39,7 +39,7 @@ def load_fft(FILE ,size):
 
     wave = load_wave(FILE_r)
 
-    for i in range(1323000):
+    for i in range(661500):
     # for i in range(10000): # debug
 
 
@@ -65,8 +65,8 @@ def load_fft(FILE ,size):
 
 
             # plt.axis([0, fr/16, 0, 2])
-            # plt.axis([0, 4096, 0, 2])
-            plt.axis([0, 4096, 0, 1000])
+            # plt.axis([0, 4096, 0, 2000])
+            plt.axis([0, 500, 0, 2000])
 
             plt.title(FILE_t)
             plt.xlabel("Frequency [Hz]"), plt.ylabel("Amblitude Spectrum")
@@ -79,7 +79,9 @@ def load_fft(FILE ,size):
     # return data
 
 
-load_fft("Cluster_A_30", 1024)
+# load_fft("Cluster_A_30", 1024)
+load_fft("60_62_64", 1024)
+
 
 
 print("Finish!!")
